@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa Churrasco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #f57c00;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        .main-content {
+            margin: 20px;
+        }
+
+        .numero {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            font-size: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            line-height: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .numero.disponivel:hover {
+            background-color: #8bc34a;
+        }
+
+        .numero.indisponivel {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .cta {
+            font-size: 20px;
+            color: #f57c00;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #f57c00;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        Rifa Kit Churrasco ou R$100 no Pix!
+    </div>
+
+    <div class="main-content">
+        <h2>Escolha o seu número da sorte:</h2>
+        <div id="numeros">
+            <!-- Números serão gerados aqui -->
+        </div>
+        <div class="cta">
+            <p>Escolha um número antes que acabe!</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Boa sorte!</p>
+    </div>
+
+    <script>
+        let numeros = Array.from({length: 100}, (_, i) => i + 1); // Cria uma lista de 1 a 100
+        let numerosComprados = [3, 15, 23, 50]; // Exemplos de números comprados
+
+        const gerarNumeros = () => {
+            const container = document.getElementById('numeros');
+            container.innerHTML = ''; // Limpar a área antes de gerar
+
+            numeros.forEach(num => {
+                const numeroDiv = document.createElement('div');
+                numeroDiv.textContent = num;
+                numeroDiv.classList.add('numero');
+                if (numerosComprados.includes(num)) {
+                    numeroDiv.classList.add('indisponivel');
+                } else {
+                    numeroDiv.classList.add('disponivel');
+                    numeroDiv.onclick = () => escolherNumero(num);
+                }
+                container.appendChild(numeroDiv);
+            });
+        };
+
+        const escolherNumero = (num) => {
+            // Aqui você vai redirecionar para o WhatsApp com a mensagem do número escolhido
+            const mensagem = Olá, gostaria de confirmar o número ${num} na rifa.;
+            const whatsappLink = https://wa.me/55999999999?text=${encodeURIComponent(mensagem)};
+            window.open(whatsappLink, '_blank');
+        };
+
+        gerarNumeros(); // Chama a função para gerar os números assim que a página carrega
+    </script>
+
+</body>
+</html>
