@@ -27,6 +27,7 @@
             font-size: 18px;
             cursor: pointer;
             border: none;
+            border-radius: 5px;
         }
 
         .cta:hover {
@@ -48,6 +49,7 @@
             cursor: pointer;
             border-radius: 5px;
             width: 60px;
+            transition: background-color 0.3s;
         }
 
         .number.selected {
@@ -90,24 +92,35 @@
 </footer>
 
 <script>
+    let selectedNumbers = [];
+
     function selectNumber(number) {
         const numElement = document.getElementById('num' + number);
+
+        // Se o número já foi selecionado, não faz nada
+        if (selectedNumbers.includes(number)) {
+            alert('Este número já foi escolhido!');
+            return;
+        }
+
+        // Seleciona ou desmarca o número
         numElement.classList.toggle('selected');
+        
+        if (numElement.classList.contains('selected')) {
+            selectedNumbers.push(number);
+        } else {
+            selectedNumbers = selectedNumbers.filter(num => num !== number);
+        }
     }
 
     function redirectToWhatsapp() {
-        const selectedNumbers = [];
-        document.querySelectorAll('.number.selected').forEach(numberElement => {
-            selectedNumbers.push(numberElement.innerText);
-        });
-        
         if (selectedNumbers.length === 0) {
             alert('Por favor, escolha um número!');
             return;
         }
 
         const whatsappMessage = Olá! Eu escolhi os números: ${selectedNumbers.join(', ')}. Meu nome é [Seu Nome].;
-        const whatsappLink = https://wa.me/55[SeuNumero]?text=${encodeURIComponent(whatsappMessage)};
+        const whatsappLink = https://wa.me/5521969054767?text=${encodeURIComponent(whatsappMessage)};
         window.open(whatsappLink, '_blank');
     }
 </script>
