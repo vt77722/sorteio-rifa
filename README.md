@@ -1,4 +1,5 @@
-# sorteio-rifa <!DOCTYPE html>
+# sorteio-rifa
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -119,8 +120,8 @@
             return;
         }
 
-        const whatsappMessage = Olá! Eu escolhi os números: ${selectedNumbers.join(', ')}. Meu nome é [Seu Nome].;
-        const whatsappLink = https://wa.me/5521969054767?text=${encodeURIComponent(whatsappMessage)};
+        const whatsappMessage = `Olá! Eu escolhi os números: ${selectedNumbers.join(', ')}. Meu nome é [Seu Nome].`;
+        const whatsappLink = `https://wa.me/5521969054767?text=${encodeURIComponent(whatsappMessage)}`;
         window.open(whatsappLink, '_blank');
     }
 </script>
